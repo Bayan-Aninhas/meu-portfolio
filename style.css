@@ -1,0 +1,445 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+
+  opacity: 0;
+    animation: fadeIn 0.9s ease forwards;
+}
+
+section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; margin-bottom: 40px; }
+
+p { color: #aaa; }
+
+/* NAV */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 70px;
+  padding: 0px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 0.95rem;
+  position: relative;
+  transition: 0.3s;
+  opacity: 0.8;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: #FFD230;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: #FFD230;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.logo img {
+  height: 120px;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* HERO */
+.hero-section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px; /* Espaçamento superior e inferior */
+}
+
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    position: relative; /* Base para o posicionamento do avatar */
+}
+
+/* --- Texto Principal (Intro) --- */
+.hero-intro {
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Fica atrás do avatar */
+}
+
+.hero-intro h1 {
+    font-size: clamp(3rem, 10vw, 10rem); /* Fonte gigante e responsiva */
+    font-weight: 900;
+    line-height: 1;
+    color: #e3dff0;
+    white-space: nowrap; /* Evita quebra de linha */
+}
+
+/* --- Avatar Central 3D --- */
+.hero-avatar-container {
+    position: absolute;
+    top: 50%; /* Centralizado verticalmente em relação ao texto */
+    left: 50%;
+    transform: translate(-50%, -10%); /* Ajuste para subir ligeiramente */
+    z-index: 2; /* Fica à frente do texto principal */
+    width: 100%;
+    max-width: 600px; /* Largura máxima do avatar */
+    display: flex;
+    justify-content: center;
+}
+
+.hero-avatar {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Garante que a imagem não se distorce */
+}
+
+/* --- Descrição e Botão --- */
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 150px; /* Espaço para o avatar centrado */
+    position: relative;
+    z-index: 3; /* Fica à frente de tudo */
+}
+
+.hero-content p {
+    flex: 1;
+    max-width: 350px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #bdb6cf; /* Texto ligeiramente mais escuro */
+}
+
+/* --- Botão CONTACT ME --- */
+.btn-contact {
+    text-decoration: none;
+    color: #e3dff0;
+    background-color: transparent;
+    border: 2px solid rgba(227, 223, 240, 0.3);
+    padding: 15px 35px;
+    border-radius: 50px; /* Formato de pílula */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Efeito Glow Roxo ao passar o rato (Hover) */
+.btn-contact:hover {
+    background-color: rgba(227, 223, 240, 0.05);
+    border-color: #a29bfe; /* Roxo vibrante */
+    color: #a29bfe;
+    box-shadow: 0 0 20px rgba(162, 155, 254, 0.6); /* Brilho neon */
+    transform: scale(1.02);
+}
+
+/* --- Responsividade (Telemóvel) --- */
+@media (max-width: 768px) {
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .hero-avatar-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        max-width: 400px;
+        margin-top: -30px; /* Ajuste para sobreposição */
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .hero-intro h1 {
+        font-size: 15vw; /* Fonte ligeiramente menor no mobile */
+    }
+
+    .hero-content p {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+}
+/* GRID */
+.grid {
+  display: grid;
+  gap: 25px;
+}
+
+.card {
+  background: #111;
+  padding: 25px;
+  border-radius: 20px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border: 1px solid #FFD230;
+}
+
+/*CONTACT */
+.contact-section {
+  display: flex;
+  max-width: 1100px;
+  margin: auto;
+  gap: 80px;
+  padding: 120px 20px;
+}
+
+/* LEFT SIDE */
+.contact-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-left h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.email-link {
+  margin-top: 30px;
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.email-link:hover {
+  color: #FFD230;
+}
+
+.whatsapp-link {
+  margin-top: 15px;
+  color: #FFD230;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* RIGHT SIDE */
+.contact-right {
+  flex: 1.2;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* INPUTS */
+.contact-form input,
+.contact-form textarea {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  transition: 0.3s;
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #FFD230;
+  outline: none;
+}
+
+/* ROW */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.half-width { flex: 1; }
+.full-width { width: 100%; }
+
+/* BUTTON */
+.submit-button {
+  background: #FFD230;
+  color: #000;
+  border: none;
+  padding: 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255,210,48,0.4);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .contact-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+} 
+
+/* FOOTER */
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #FFD230;
+    --link-color: #aaaaaa;
+    --footer-bg: #0a0a0a;
+}
+
+.footer {
+    padding: 60px 20px 30px;
+    background: var(--footer-bg);
+    color: var(--text-color);
+    border-top: 1px solid #1a1a1a;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+    text-align: left;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-group {
+    margin-bottom: 30px;
+}
+
+.footer-column h3 {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-bottom: 0px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column a, 
+.footer-column p {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: var(--accent-color);
+}
+
+/* For the diagonal arrows */
+.footer-column a::after {
+    content: ' ↗';
+    font-size: 0.8rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.footer-column a:hover::after {
+    transform: translate(2px, -2px);
+}
+
+/* Bottom Section */
+.footer-bottom {
+    margin-top: 80px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 30px;
+    font-size: 0.85rem;
+    color: var(--link-color);
+}
+
+.footer-bottom span {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/*KEYFRAMES */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@media(min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
