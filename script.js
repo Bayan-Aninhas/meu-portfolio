@@ -4,12 +4,32 @@
 emailjs.init("QXrJK1AQWdrrXkuD-");
 
 const form = document.getElementById("contactForm");
+const phoneInput = document.getElementById("phone");
+
+// bloquear letras no input
+if (phoneInput)
+  phoneInput.addEventListener("input", () => {
+  phoneInput.value = phoneInput.value
+    .replace(/[^0-9+]/g, '')
+    .slice(0, 13); // limite (ex: +351912345678)
+});
 
 if (form) {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    const phone = phoneInput.value.trim();
+
+    const regex = /^(?:\+351)?\s?9\d{8}$/;
+
+    if (!regex.test(phone)) {
+      showToast("error");
+      alert("Número inválido. Usa um número português válido.");
+      return;
+    }
+
     const btn = form.querySelector(".submit-button");
+
     if (btn) {
       btn.textContent = "A enviar...";
       btn.disabled = true;
@@ -18,7 +38,7 @@ if (form) {
     emailjs.sendForm(
       "service_q47gizr",
       "template_6pkep1z",
-      form // 👈 CORREÇÃO AQUI
+      form
     )
     .then(() => {
       showToast("success");
@@ -108,7 +128,7 @@ function showToast(type = 'success') {
 }
 
 /* =========================
-   SCROLL REVEAL (SÓ UMA VEZ)
+   SCROLL REVEAL 
 ========================= */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -154,3 +174,47 @@ if (tabs.length && cards.length) {
     });
   });
 }
+
+/* =========================
+   BUTTON SCROLL
+========================= */
+const btnCv = document.querySelector('.btn-cv');
+
+if (btnCv) {
+  btnCv.addEventListener('click', () => {
+    const target = document.querySelector('#projects');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
+
+const btnHire = document.querySelector('.btn-hire');
+
+if (btnHire) {
+  btnHire.addEventListener('click', () => {
+    const target = document.querySelector('#contact');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
+
+/* =========================
+   PHONE VALIDATION
+========================= */
+
+const phoneInput = document.getElementById("phone");
+
+form.addEventListener("submit", function (e) {
+  const phone = phoneInput.value.trim();
+
+  const regex = /^(?:\+351)?\s?9\d{8}$/;
+
+  if (!regex.test(phone)) {
+    e.preventDefault();
+    showToast("error");
+    alert("Número inválido. Usa um número português válido.");
+    return;
+  }
+});
