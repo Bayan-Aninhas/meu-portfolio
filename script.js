@@ -7,19 +7,19 @@ const form = document.getElementById("contactForm");
 const phoneInput = document.getElementById("phone");
 
 // bloquear letras no input
-if (phoneInput)
+if (phoneInput) {
   phoneInput.addEventListener("input", () => {
-  phoneInput.value = phoneInput.value
-    .replace(/[^0-9+]/g, '')
-    .slice(0, 13); // limite (ex: +351912345678)
-});
+    phoneInput.value = phoneInput.value
+      .replace(/[^0-9+]/g, '')
+      .slice(0, 13);
+  });
+}
 
 if (form) {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const phone = phoneInput.value.trim();
-
     const regex = /^(?:\+351)?\s?9\d{8}$/;
 
     if (!regex.test(phone)) {
@@ -58,18 +58,19 @@ if (form) {
 }
 
 /* =========================
-   FOOTER YEAR
+   FOOTER YEAR (FIXED)
 ========================= */
-const yearEl = document.querySelector('.footer-bottom p:last-child');
-if (yearEl) {
-  yearEl.innerHTML = `&copy; ${new Date().getFullYear()}`;
+const footerP = document.querySelectorAll('.footer-bottom p');
+
+if (footerP.length > 1) {
+  footerP[1].innerHTML = `&copy; ${new Date().getFullYear()}`;
 }
 
 /* =========================
    HERO PARALLAX
 ========================= */
 const heroArea = document.querySelector('.hero');
-const avatar = document.querySelector('.floating-avatar');
+const avatar = document.querySelector('.photo-avatar');
 
 if (heroArea && avatar) {
   heroArea.addEventListener('mousemove', (e) => {
@@ -111,9 +112,9 @@ function showToast(type = 'success') {
   toast.className = `toast toast--${type}`;
 
   toast.innerHTML = `
-    <div>
-      <strong>${title}</strong>
-      <p>${text}</p>
+    <div class="toast__body">
+      <div class="toast__title">${title}</div>
+      <div class="toast__text">${text}</div>
     </div>
   `;
 
@@ -128,7 +129,7 @@ function showToast(type = 'success') {
 }
 
 /* =========================
-   SCROLL REVEAL 
+   SCROLL REVEAL (SAFE)
 ========================= */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -139,7 +140,16 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});
+
+/* fallback (caso observer falhe) */
+window.addEventListener('load', () => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 200);
+  });
+});
 
 /* =========================
    PROJECT FILTER
@@ -158,8 +168,6 @@ if (tabs.length && cards.length) {
 
       cards.forEach(card => {
         const match = filter === 'all' || card.dataset.category === filter;
-
-        card.style.transition = "0.3s ease";
 
         if (match) {
           card.style.opacity = "1";
@@ -182,10 +190,7 @@ const btnCv = document.querySelector('.btn-cv');
 
 if (btnCv) {
   btnCv.addEventListener('click', () => {
-    const target = document.querySelector('#projects');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
   });
 }
 
@@ -193,28 +198,6 @@ const btnHire = document.querySelector('.btn-hire');
 
 if (btnHire) {
   btnHire.addEventListener('click', () => {
-    const target = document.querySelector('#contact');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   });
 }
-
-/* =========================
-   PHONE VALIDATION
-========================= */
-
-const phoneInput = document.getElementById("phone");
-
-form.addEventListener("submit", function (e) {
-  const phone = phoneInput.value.trim();
-
-  const regex = /^(?:\+351)?\s?9\d{8}$/;
-
-  if (!regex.test(phone)) {
-    e.preventDefault();
-    showToast("error");
-    alert("Número inválido. Usa um número português válido.");
-    return;
-  }
-});
