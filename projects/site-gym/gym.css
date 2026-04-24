@@ -582,7 +582,7 @@ h2.sec-h {
     position: relative;
     overflow: hidden;
     transition: background .35s;
-    cursor: none;
+    cursor: default;
     border-bottom: 3px solid transparent;
     min-height: 280px;
 }
@@ -757,7 +757,7 @@ h2.sec-h {
 .g-item {
     position: relative;
     overflow: hidden;
-    cursor: none;
+    cursor: default;
 }
 
 .g-item img {
@@ -827,7 +827,7 @@ h2.sec-h {
     padding: 52px 40px;
     position: relative;
     transition: transform .3s;
-    cursor: none;
+    cursor: default;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
 }
 
@@ -961,7 +961,7 @@ h2.sec-h {
     text-transform: uppercase;
     text-decoration: none;
     transition: all .3s;
-    cursor: none;
+    cursor: pointer;
     border: 1.5px solid rgba(170, 221, 0, .3);
     color: var(--green);
     clip-path: polygon(8px 0, 100% 0, calc(100%-8px) 100%, 0 100%);
@@ -1008,7 +1008,7 @@ h2.sec-h {
     background: transparent;
     border: 1px solid rgba(240, 237, 229, .2);
     color: var(--white);
-    cursor: none;
+    cursor: pointer;
     font-size: 1rem;
     transition: all .2s;
     clip-path: polygon(6px 0, 100% 0, calc(100%-6px) 100%, 0 100%);
@@ -1213,7 +1213,7 @@ h2.sec-h {
     letter-spacing: .18em;
     text-transform: uppercase;
     padding: 15px 28px;
-    cursor: none;
+    cursor: pointer;
     transition: filter .2s;
     clip-path: polygon(0 0, calc(100%-8px) 0, 100% 50%, calc(100%-8px) 100%, 0 100%);
     white-space: nowrap;
