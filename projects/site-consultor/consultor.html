@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricardo Monteiro | Consultor Financeiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oxford: rgb(0, 33, 71);
+    --oxford-deep: rgb(0, 20, 45);
+    --oxford-mid: rgb(0, 45, 95);
+    --tan: rgb(210, 180, 140);
+    --tan-light: rgb(230, 210, 180);
+    --tan-dark: rgb(180, 148, 108);
+    --white: #ffffff;
+    --off-white: #f8f5f0;
+    --gray-light: #e8e4de;
+    --gray-mid: #c0b8ac;
+    --text-dark: #111827;
+    --text-body: #4a4540;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: transparent;
+    transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(0, 33, 71, 0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 30px rgba(0,0,0,0.25);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--tan); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--tan); }
+  .nav-cta {
+    padding: 10px 24px;
+    border: 1px solid var(--tan);
+    color: var(--tan) !important;
+    border-radius: 2px;
+    transition: background 0.3s, color 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--tan); color: var(--oxford) !important; }
+
+  /* ─── HAMBURGER ─── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 26px; height: 2px;
+    background: var(--white);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--oxford-deep);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mobile-menu a {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--tan); }
+  .mobile-menu .mobile-cta {
+    margin-top: 12px;
+    padding: 16px 40px;
+    border: 1px solid var(--tan);
+    color: var(--tan) !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--oxford-deep);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1600&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.18;
+    transform: scale(1.04);
+    transition: transform 8s ease;
+  }
+  #hero:hover .hero-bg { transform: scale(1.08); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgba(0,20,45,0.98) 0%, rgba(0,33,71,0.85) 55%, rgba(0,33,71,0.4) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-text { animation: fadeUp 1s ease both; }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--tan);
+    flex-shrink: 0;
+  }
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 5.5vw, 72px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--tan);
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 16px 38px;
+    background: var(--tan);
+    color: var(--oxford-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--tan-light); transform: translateY(-1px); }
+  .btn-outline {
+    padding: 16px 38px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--tan); color: var(--tan); }
+
+  .hero-visual {
+    position: relative;
+    animation: fadeUp 1s 0.25s ease both;
+  }
+  .hero-portrait-wrap {
+    position: relative;
+    height: 540px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .hero-portrait {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: top;
+    max-width: 360px;
+    border-top: 3px solid var(--tan);
+  }
+  .hero-badge {
+    position: absolute;
+    left: 0; bottom: 60px;
+    background: var(--tan);
+    color: var(--oxford-deep);
+    padding: 22px 28px;
+    max-width: 200px;
+  }
+  .hero-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+  }
+  .hero-badge-txt {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+    font-weight: 500;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--oxford);
+    padding: 44px 60px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0 60px;
+    position: relative;
+  }
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    height: 50px; width: 1px;
+    background: rgba(210,180,140,0.25);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--tan);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+  .about-accent {
+    position: absolute;
+    bottom: -24px; right: -24px;
+    width: 60%; height: 60%;
+    border: 2px solid var(--tan);
+    z-index: -1;
+  }
+  .about-tag {
+    position: absolute;
+    top: 30px; left: -30px;
+    background: var(--oxford);
+    color: var(--tan);
+    padding: 14px 22px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    font-style: italic;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tan-dark);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--tan-dark);
+  }
+  .section-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 3.5vw, 50px);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--oxford);
+    margin-bottom: 28px;
+  }
+  .section-h2 em { font-style: italic; color: var(--tan-dark); }
+  .about-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.82;
+    color: var(--text-body);
+    margin-bottom: 20px;
+  }
+  .signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 30px;
+    color: var(--oxford);
+    margin-top: 32px;
+    display: block;
+  }
+  .credentials {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text-body);
+    letter-spacing: 0.04em;
+  }
+  .credential-dot {
+    width: 6px; height: 6px;
+    background: var(--tan);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── SERVICES ─── */
+  #services {
+    background: var(--oxford-deep);
+    padding: 120px 60px;
+  }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+  .services-header .section-label { color: var(--tan); }
+  .services-header .section-label::before { background: var(--tan); }
+  .services-header .section-h2 { color: var(--white); margin-bottom: 0; }
+  .services-header .section-h2 em { color: var(--tan); }
+  .services-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+    align-self: end;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(210,180,140,0.12);
+  }
+  .service-card {
+    background: rgba(0,20,45,0.9);
+    padding: 52px 44px;
+    position: relative;
+    transition: background 0.4s;
+    cursor: default;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px; width: 0;
+    background: var(--tan);
+    transition: width 0.4s;
+  }
+  .service-card:hover { background: rgba(0,33,71,0.98); }
+  .service-card:hover::before { width: 100%; }
+  .service-icon {
+    width: 52px; height: 52px;
+    border: 1px solid rgba(210,180,140,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .service-icon svg { width: 24px; height: 24px; stroke: var(--tan); fill: none; }
+  .service-num {
+    position: absolute;
+    top: 44px; right: 44px;
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 700;
+    color: rgba(210,180,140,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
+  .service-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.82;
+  }
+
+  /* ─── PROCESS ─── */
+  #processo {
+    padding: 120px 60px;
+    background: var(--off-white);
+  }
+  .processo-inner { max-width: 1200px; margin: 0 auto; }
+  .processo-header { text-align: center; margin-bottom: 80px; }
+  .processo-header .section-label { justify-content: center; }
+  .processo-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .processo-steps::before {
+    content: '';
+    position: absolute;
+    top: 38px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--tan), transparent);
+  }
+  .step {
+    padding: 0 28px;
+    text-align: center;
+    position: relative;
+  }
+  .step-num {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--oxford);
+    color: var(--tan);
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--oxford);
+    margin-bottom: 14px;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.75;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #depoimentos {
+    padding: 120px 60px;
+    background: var(--white);
+  }
+  .depoimentos-inner { max-width: 1200px; margin: 0 auto; }
+  .depoimentos-header { margin-bottom: 70px; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .testimonial-card {
+    padding: 44px 38px;
+    border: 1px solid var(--gray-light);
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .testimonial-card:hover {
+    border-color: var(--tan);
+    box-shadow: 0 12px 40px rgba(0,33,71,0.08);
+  }
+  .testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    color: var(--tan);
+    line-height: 0.5;
+    margin-bottom: 28px;
+    display: block;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--text-body);
+    line-height: 1.82;
+    margin-bottom: 32px;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-light);
+  }
+  .author-img {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .author-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--oxford);
+    display: block;
+  }
+  .author-role {
+    font-size: 12px;
+    color: var(--gray-mid);
+    letter-spacing: 0.06em;
+  }
+  .stars { color: var(--tan); font-size: 13px; margin-bottom: 6px; letter-spacing: 2px; }
+
+  /* ─── NEWSLETTER ─── */
+  .newsletter {
+    background: var(--oxford);
+    padding: 72px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .newsletter-text .section-h2 {
+    color: var(--white);
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .newsletter-text p {
+    color: rgba(255,255,255,0.55);
+    font-size: 15px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    flex-shrink: 0;
+    min-width: 360px;
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 16px 22px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(210,180,140,0.3);
+    border-right: none;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.35); }
+  .newsletter-form input:focus { border-color: var(--tan); }
+  .newsletter-form button {
+    padding: 16px 28px;
+    background: var(--tan);
+    color: var(--oxford-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .newsletter-form button:hover { background: var(--tan-light); }
+
+  /* ─── CONTACT ─── */
+  #contacto {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .contact-info .section-h2 { margin-bottom: 24px; }
+  .contact-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .contact-items { display: flex; flex-direction: column; gap: 28px; }
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .contact-item-icon {
+    width: 46px; height: 46px;
+    border: 1px solid var(--tan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-item-icon svg { width: 20px; height: 20px; stroke: var(--tan); fill: none; }
+  .contact-item-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--tan-dark);
+    margin-bottom: 4px;
+  }
+  .contact-item-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--oxford);
+    font-weight: 500;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--tan-dark);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 15px 18px;
+    border: 1px solid var(--gray-light);
+    background: var(--off-white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--tan); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--oxford-deep);
+    padding: 70px 60px 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand .nav-logo { display: inline-block; margin-bottom: 20px; font-size: 22px; }
+  .footer-brand p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8;
+    max-width: 280px;
+  }
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 22px;
+    display: block;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--tan); }
+  .footer-bottom {
+    border-top: 1px solid rgba(210,180,140,0.12);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+  .certif {
+    display: flex;
+    gap: 20px;
+  }
+  .certif span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--oxford-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--tan); }
+
+  /* ══════════════════════════════
+     RESPONSIVE — TABLET (≤ 1024px)
+  ══════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 32px; }
+
+    .hero-content { padding: 0 32px; gap: 36px; }
+    .hero-portrait-wrap { height: 420px; }
+    .hero-badge { left: -10px; }
+
+    #about { padding: 80px 32px; gap: 48px; }
+    .about-img { height: 480px; }
+
+    #services { padding: 80px 32px; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+    #processo { padding: 80px 32px; }
+    .processo-steps { grid-template-columns: repeat(2, 1fr); gap: 48px; }
+    .processo-steps::before { display: none; }
+
+    #depoimentos { padding: 80px 32px; }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .newsletter { padding: 52px 32px; }
+
+    #contacto { padding: 80px 32px; gap: 48px; }
+
+    footer { padding: 60px 32px 36px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .stats-bar { padding: 36px 32px; gap: 0; flex-wrap: wrap; }
+    .stat-item { padding: 16px 28px; }
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE — MOBILE (≤ 768px)
+  ══════════════════════════════ */
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+
+    /* Hero */
+    #hero { height: auto; min-height: 100svh; padding: 100px 0 60px; align-items: flex-start; }
+    .hero-content {
+      grid-template-columns: 1fr;
+      padding: 0 20px;
+      gap: 40px;
+    }
+    .hero-h1 { font-size: clamp(34px, 9vw, 52px); }
+    .hero-sub { font-size: 17px; max-width: 100%; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; width: 100%; }
+    .hero-visual { order: -1; }
+    .hero-portrait-wrap { height: 320px; justify-content: center; }
+    .hero-portrait { max-width: 100%; width: 100%; }
+    .hero-badge { left: 0; bottom: 10px; }
+
+    /* Stats bar */
+    .stats-bar { padding: 28px 20px; gap: 0; }
+    .stat-item { width: 50%; padding: 16px 12px; }
+    .stat-item:nth-child(2)::after { display: none; }
+    .stat-item:nth-child(3)::after { display: none; }
+    .stat-num { font-size: 34px; }
+
+    /* About */
+    #about {
+      grid-template-columns: 1fr;
+      padding: 64px 20px;
+      gap: 48px;
+    }
+    .about-img { height: 340px; }
+    .about-accent { display: none; }
+    .about-tag { left: 0; top: 16px; }
+
+    /* Services */
+    #services { padding: 64px 20px; }
+    .services-header { grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { padding: 36px 28px; }
+
+    /* Processo */
+    #processo { padding: 64px 20px; }
+    .processo-steps { grid-template-columns: 1fr; gap: 40px; }
+
+    /* Depoimentos */
+    #depoimentos { padding: 64px 20px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    /* Newsletter */
+    .newsletter { padding: 48px 20px; flex-direction: column; gap: 28px; }
+    .newsletter-form { min-width: 0; width: 100%; flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(210,180,140,0.3); border-bottom: none; }
+    .newsletter-form button { padding: 14px 20px; }
+
+    /* Contact */
+    #contacto { grid-template-columns: 1fr; padding: 64px 20px; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    /* Footer */
+    footer { padding: 52px 20px 28px; }
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .certif { flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE — SMALL (≤ 480px)
+  ══════════════════════════════ */
+  @media (max-width: 480px) {
+    .hero-h1 { font-size: clamp(30px, 8vw, 44px); }
+    .stat-item { width: 50%; padding: 14px 8px; }
+    .stat-num { font-size: 28px; }
+    .section-h2 { font-size: clamp(26px, 7vw, 38px); }
+    .hero-portrait-wrap { height: 260px; }
+    .service-card { padding: 28px 22px; }
+    .testimonial-card { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Ricardo<span>.</span>Monteiro</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#services">Servicos</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contacto" class="nav-cta">Agendar Consulta</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link">Sobre</a>
+  <a href="#services" class="mobile-link">Servicos</a>
+  <a href="#processo" class="mobile-link">Processo</a>
+  <a href="#depoimentos" class="mobile-link">Depoimentos</a>
+  <a href="#contacto" class="mobile-link mobile-cta">Agendar Consulta</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-label">Consultor Financeiro Independente</div>
+      <h1 class="hero-h1">
+        Decisoes <em>financeiras</em><br>que constroem<br>o seu futuro.
+      </h1>
+      <p class="hero-sub">
+        Estrategias personalizadas de planeamento financeiro, gestao de patrimonio e investimento para particulares e empresas em Lisboa e em todo o pais.
+      </p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">Agendar Consulta Gratuita</a>
+        <a href="#services" class="btn-outline">Conhecer Servicos</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-portrait-wrap">
+        <img
+          class="hero-portrait"
+          src="https://images.unsplash.com/photo-1764084052708-c3c0611d89e7?q=80&w=600&auto=format&fit=crop=80"
+          alt="Ricardo Monteiro - Consultor Financeiro"
+        />
+        <div class="hero-badge">
+          <span class="hero-badge-num">20+</span>
+          <span class="hero-badge-txt">Anos de Experiencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <span class="stat-num">450+</span>
+    <span class="stat-label">Clientes Satisfeitos</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <span class="stat-num">98%</span>
+    <span class="stat-label">Taxa de Retencao</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <span class="stat-num">280M</span>
+    <span class="stat-label">Patrimonio Gerido</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <span class="stat-num">20+</span>
+    <span class="stat-label">Anos de Carreira</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap reveal">
+    <img
+      class="about-img"
+      src="https://images.unsplash.com/photo-1764084051461-d82772f90a5c?q=80&w=687&auto=format&fit=crop=80"
+      alt="Ricardo Monteiro no escritorio"
+    />
+    <div class="about-accent"></div>
+    <div class="about-tag">Licenciado pela Nova SBE</div>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="section-label">Sobre Mim</div>
+    <h2 class="section-h2">Uma carreira construida sobre <em>resultados reais</em></h2>
+    <p class="about-body">
+      Iniciei a minha carreira na banca de investimento em Lisboa e Londres. Ao longo de duas decadas, orientei centenas de familias e empresas a tomar decisoes financeiras fundamentadas, proteger o seu patrimonio e alcancar a liberdade financeira com seguranca.
+    </p>
+    <p class="about-body">
+      O meu metodo assenta em tres pilares: analise rigorosa, planeamento a longo prazo e uma relacao de total transparencia com cada cliente. Nao vendo produtos — construo estrategias.
+    </p>
+    <span class="signature">Ricardo Monteiro</span>
+    <div class="credentials">
+      <div class="credential"><span class="credential-dot"></span>Certified Financial Planner (CFP)</div>
+      <div class="credential"><span class="credential-dot"></span>CFA Charterholder — CFA Institute</div>
+      <div class="credential"><span class="credential-dot"></span>Membro da Associacao Portuguesa de Consultores Financeiros</div>
+      <div class="credential"><span class="credential-dot"></span>Licenciado em Gestao — Nova School of Business and Economics</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="reveal">
+        <div class="section-label">Os Nossos Servicos</div>
+        <h2 class="section-h2">Entregamos <em>resultados</em> mensuráveis</h2>
+      </div>
+      <p class="services-sub reveal reveal-delay-1">
+        Cada servico e desenhado em funcao dos seus objetivos especificos, com uma abordagem personalizada e baseada em dados.
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 3v18h18M7 16l4-4 4 4 4-4"/></svg>
+        </div>
+        <div class="service-name">Planeamento Financeiro Pessoal</div>
+        <p class="service-desc">Analise completa da sua situacao financeira e criacao de um plano estruturado para atingir os seus objetivos de vida com seguranca e eficiencia fiscal.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="service-name">Gestao de Patrimonio</div>
+        <p class="service-desc">Estruturacao e protecao do seu patrimonio atraves de uma carteira diversificada, com foco em preservacao do capital e crescimento sustentado a longo prazo.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">03</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="service-name">Estrategia de Investimento</div>
+        <p class="service-desc">Construcao de carteiras de investimento alinhadas com o seu perfil de risco, horizonte temporal e objetivos financeiros, com monitorizacao continua.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-num">04</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div class="service-name">Otimizacao Fiscal</div>
+        <p class="service-desc">Identificacao das melhores estrategias legais para reducao da carga fiscal sobre rendimentos, investimentos e transmissao de patrimonio familiar.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">05</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="service-name">Consultoria Empresarial</div>
+        <p class="service-desc">Apoio financeiro estrategico para PME e startups — desde estruturacao de capital e financiamento ate planeamento de expansao e valorizacao do negocio.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">06</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="service-name">Planeamento da Reforma</div>
+        <p class="service-desc">Criacao de um plano solido para garantir a sua independencia financeira na reforma, com projecoes realistas e instrumentos de poupanca adequados.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="processo-inner">
+    <div class="processo-header reveal">
+      <div class="section-label">Como Trabalhamos</div>
+      <h2 class="section-h2">O nosso <em>processo</em></h2>
+    </div>
+    <div class="processo-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Consulta Inicial</div>
+        <p class="step-desc">Reuniao gratuita de 60 minutos para compreender a sua situacao, objetivos e expectativas sem qualquer compromisso.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-title">Analise Detalhada</div>
+        <p class="step-desc">Levantamento completo da sua situacao financeira atual, identificacao de riscos e oportunidades de melhoria.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-title">Plano Personalizado</div>
+        <p class="step-desc">Elaboracao de uma estrategia financeira a medida, com objetivos claros, prazos definidos e metricas de acompanhamento.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-title">Acompanhamento</div>
+        <p class="step-desc">Revisoes periodicas do plano, ajustes face a mudancas de mercado ou vida pessoal e relatorios regulares de desempenho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="depoimentos-inner">
+    <div class="depoimentos-header reveal">
+      <div class="section-label">Depoimentos</div>
+      <h2 class="section-h2">O que dizem os <em>nossos clientes</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">O Ricardo transformou completamente a minha visao sobre investimento. Com a sua orientacao, aumentei o rendimento da minha carteira em mais de 40% num periodo de tres anos, mantendo um perfil de risco conservador.</p>
+        <div class="testimonial-author">
+          <img class="author-img" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=96&auto=format&fit=crop" alt="Ana Ferreira">
+          <div>
+            <span class="author-name">Ana Ferreira</span>
+            <span class="author-role">Medica, Lisboa</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Trabalho com o Ricardo ha seis anos. O planeamento que desenvolvemos em conjunto permitiu-me vender a minha empresa nas melhores condicoes fiscais e planear uma reforma confortavel antes dos 55 anos.</p>
+        <div class="testimonial-author">
+          <img class="author-img" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&auto=format&fit=crop" alt="Paulo Silva">
+          <div>
+            <span class="author-name">Paulo Silva</span>
+            <span class="author-role">Empresario, Porto</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Profissionalismo exemplar. O Ricardo nao vende produtos financeiros — apresenta solucoes que realmente fazem sentido para a nossa situacao familiar. Uma relacao de confianca que ja dura ha quatro anos.</p>
+        <div class="testimonial-author">
+          <img class="author-img" src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=96&auto=format&fit=crop" alt="Marta Costa">
+          <div>
+            <span class="author-name">Marta Costa</span>
+            <span class="author-role">Advogada, Cascais</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="newsletter-text reveal">
+    <h2 class="section-h2">Insights financeiros mensais</h2>
+    <p>Receba analises de mercado, dicas de planeamento e novidades fiscais diretamente na sua caixa de entrada.</p>
+  </div>
+  <div class="newsletter-form reveal reveal-delay-1">
+    <input type="email" placeholder="O seu endereco de email">
+    <button type="button">Subscrever</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="contact-info reveal">
+    <div class="section-label">Contacto</div>
+    <h2 class="section-h2">Pronto para dar o <em>primeiro passo</em>?</h2>
+    <p class="contact-desc">A primeira consulta e totalmente gratuita e sem compromisso. Vamos conversar sobre os seus objetivos financeiros e perceber de que forma posso ajudar.</p>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val">ricardo@monteiroconsultor.pt</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Telefone</div>
+          <div class="contact-item-val">+351 912 345 678</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Escritorio</div>
+          <div class="contact-item-val">Av. da Liberdade, 110 — Lisboa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="contact-form reveal reveal-delay-1" onsubmit="handleForm(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" placeholder="O seu nome">
+      </div>
+      <div class="form-group">
+        <label>Apelido</label>
+        <input type="text" placeholder="O seu apelido">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="email@exemplo.com">
+    </div>
+    <div class="form-group">
+      <label>Telefone</label>
+      <input type="tel" placeholder="+351 9XX XXX XXX">
+    </div>
+    <div class="form-group">
+      <label>Servico de Interesse</label>
+      <select>
+        <option value="">Selecione um servico</option>
+        <option>Planeamento Financeiro Pessoal</option>
+        <option>Gestao de Patrimonio</option>
+        <option>Estrategia de Investimento</option>
+        <option>Otimizacao Fiscal</option>
+        <option>Consultoria Empresarial</option>
+        <option>Planeamento da Reforma</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mensagem</label>
+      <textarea rows="5" placeholder="Descreva brevemente a sua situacao ou objetivo..."></textarea>
+    </div>
+    <button type="submit" class="btn-primary" style="width:100%; text-align:center;">Enviar Pedido de Consulta</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Ricardo<span>.</span>Monteiro</a>
+      <p>Consultor Financeiro Independente certificado CFP e CFA, com mais de 20 anos de experiencia ao servico de particulares e empresas em Portugal.</p>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">Servicos</span>
+      <ul>
+        <li><a href="#services">Planeamento Financeiro</a></li>
+        <li><a href="#services">Gestao de Patrimonio</a></li>
+        <li><a href="#services">Investimento</a></li>
+        <li><a href="#services">Otimizacao Fiscal</a></li>
+        <li><a href="#services">Consultoria Empresarial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">Empresa</span>
+      <ul>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-title">Legal</span>
+      <ul>
+        <li><a href="#">Politica de Privacidade</a></li>
+        <li><a href="#">Termos de Servico</a></li>
+        <li><a href="#">Aviso Legal</a></li>
+        <li><a href="#">Conflito de Interesses</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Ricardo Monteiro Consultor Financeiro. Todos os direitos reservados.</p>
+    <div class="certif">
+      <span>CFP Certified</span>
+      <span>CFA Charterholder</span>
+      <span>APCF Membro</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Counter animation
+  function animateCount(el) {
+    const target = parseFloat(el.textContent);
+    const suffix = el.textContent.replace(/[\d.]/g, '');
+    const isFloat = el.textContent.includes('.');
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = (isFloat ? current.toFixed(1) : Math.floor(current)) + suffix;
+    }, 25);
+  }
+  const statNums = document.querySelectorAll('.stat-num');
+  const statsIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); statsIo.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => statsIo.observe(el));
+
+  // Form
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Pedido Enviado';
+    btn.style.background = '#2d6a4f';
+    btn.style.color = '#fff';
+    setTimeout(() => { btn.textContent = 'Enviar Pedido de Consulta'; btn.style.background = ''; btn.style.color = ''; }, 3500);
+  }
+</script>
+</body>
+</html>
