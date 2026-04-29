@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nós — 花美 Hanabi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="beauty.css">
+  <style>
+    .stats-strip {
+      background: var(--dark-choc);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(242,207,162,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--sakura);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(242,207,162,0.5);
+    }
+    .timeline {
+      padding: 6rem 4rem;
+      background: var(--white);
+    }
+    .timeline-items {
+      margin-top: 3rem;
+      position: relative;
+    }
+    .timeline-items::before {
+      content: '';
+      position: absolute;
+      left: 80px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--sakura), transparent);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      align-items: flex-start;
+    }
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--aloewood);
+      min-width: 60px;
+      text-align: right;
+      padding-top: 0.2rem;
+    }
+    .timeline-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--sakura);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 3px rgba(236,156,157,0.3);
+      flex-shrink: 0;
+      margin-top: 0.35rem;
+    }
+    .timeline-content h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--dark-choc);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-content p {
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+    .certif-section {
+      padding: 5rem 4rem;
+      background: var(--cream);
+    }
+    .certif-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .certif-item {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(236,156,157,0.2);
+      transition: all 0.3s;
+    }
+    .certif-item:hover {
+      border-color: var(--sakura);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(236,156,157,0.15);
+    }
+    .certif-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .certif-item h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--dark-choc);
+      margin-bottom: 0.4rem;
+    }
+    .certif-item p {
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    @media (max-width: 1024px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .certif-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .timeline { padding: 4rem 1.5rem; }
+      .timeline-items::before { left: 60px; }
+      .timeline-item { gap: 1.5rem; }
+      .certif-section { padding: 4rem 1.5rem; }
+      .certif-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-logo" onclick="location.href='beauty.html'">
+      <span class="logo-jp">花美</span>
+      <span class="logo-en">Hanabi</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="beauty.html" class="nav-link">Início</a>
+      <a href="s.beauty.html" class="nav-link">Serviços</a>
+      <a href="catalogo.beauty.html" class="nav-link">Catálogo</a>
+      <a href="about.beauty.html" class="nav-link active">Sobre</a>
+      <a href="cta.beauty.html" class="nav-link nav-cta">Marcar</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">美</div>
+    <div>
+      <p>A Nossa História</p>
+      <h1>Quem<br><em>somos</em></h1>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num">+2000</span>
+      <span class="stat-label">Clientes Satisfeitas</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">7</span>
+      <span class="stat-label">Anos de Experiência</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">30+</span>
+      <span class="stat-label">Tratamentos Disponíveis</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">98%</span>
+      <span class="stat-label">Taxa de Satisfação</span>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="about-story">
+    <div class="about-story-grid">
+      <div>
+        <p class="label">A Nossa Origem</p>
+        <h2 class="section-title">Nascemos de uma<br><em>paixão</em> genuína</h2>
+        <p class="body-text">A Hanabi nasceu em 2018 do sonho de Marta Ferreira — esteticista com formação em Tóquio — de criar um espaço onde a filosofia de cuidado japonesa se fundisse com a sensibilidade portuguesa.</p>
+        <p class="body-text">O nome "花美" (Hanabi) significa literalmente "flor de beleza" em japonês. Como as flores de cerejeira que inspiram a nossa identidade visual, acreditamos que a beleza é efémera, preciosa e merece ser celebrada.</p>
+        <p class="body-text">Hoje, com uma equipa de 4 especialistas e mais de 2000 clientes satisfeitas, a Hanabi é uma referência em Lisboa para quem procura tratamentos de qualidade numa ambiente de serenidade autêntica.</p>
+      </div>
+      <div style="position: relative;">
+        <div style="height: 450px; position: relative;">
+          <div style="position: absolute; top: 0; left: 0; width: 70%; height: 65%; background: linear-gradient(135deg, var(--sakura), var(--misty)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-jp); font-size: 5rem; color: rgba(255,255,255,0.5);">花</div>
+          <div style="position: absolute; bottom: 0; right: 0; width: 60%; height: 55%; background: linear-gradient(135deg, var(--dark-choc), var(--aloewood)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-jp); font-size: 5rem; color: rgba(242,207,162,0.2);">美</div>
+          <div style="position: absolute; top: 40%; left: 55%; transform: translate(-50%, -50%); background: var(--white); padding: 1rem 1.5rem; border-radius: 4px; box-shadow: var(--shadow); text-align: center; white-space: nowrap;">
+            <div style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--aloewood);">Est. 2018</div>
+            <div style="font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--milk-tea);">Lisboa, Portugal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="about-values">
+    <p class="label center">A Nossa Essência</p>
+    <h2 class="section-title center">Os nossos<br><em>valores</em></h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <span class="value-icon">🌸</span>
+        <h4>Harmonia</h4>
+        <p>Acreditamos que a beleza exterior reflete o equilíbrio interior. Cada tratamento é pensado para body e mente.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">✦</span>
+        <h4>Excelência</h4>
+        <p>Usamos apenas produtos de alta qualidade e técnicas validadas cientificamente para garantir os melhores resultados.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">❀</span>
+        <h4>Autenticidade</h4>
+        <p>Cada cliente é única. Personalizamos cada ritual às suas necessidades, objetivos e tipo de pele.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">◆</span>
+        <h4>Serenidade</h4>
+        <p>O nosso espaço foi criado para ser um refúgio. Aqui, o mundo lá fora para e você é a prioridade absoluta.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">⊹</span>
+        <h4>Cuidado</h4>
+        <p>Tratamos cada cliente como tratamos a nós próprias — com atenção, delicadeza e total dedicação.</p>
+      </div>
+      <div class="value-item">
+        <span class="value-icon">🌺</span>
+        <h4>Inovação</h4>
+        <p>Acompanhamos as últimas tendências e tecnologias em estética para oferecer sempre o que há de melhor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <p class="label">A Nossa Jornada</p>
+    <h2 class="section-title">Como <em>chegámos</em> aqui</h2>
+    <div class="timeline-items">
+      <div class="timeline-item">
+        <span class="timeline-year">2018</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Abertura da Hanabi</h4>
+          <p>Marta Ferreira abre a Hanabi numa pequena sala no Chiado, com apenas dois tratamentos e uma grande visão para o futuro da estética em Lisboa.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2019</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Expansão do Espaço</h4>
+          <p>Com uma lista de espera crescente, a Hanabi muda-se para um espaço maior e contrata a primeira esteticista da equipa, Joana Costa.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2020</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Adaptação & Resiliência</h4>
+          <p>Durante a pandemia, lançamos serviços de consultoria online e kits de cuidado doméstico. A nossa comunidade de clientes cresce e fortalece-se.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2022</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Laser e Tecnologia</h4>
+          <p>Investimos em equipamento de laser diodo de última geração e expandimos para a área de depilação e radiofrequência facial.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-year">2025</span>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h4>Hoje — Mais de 2000 Clientes</h4>
+          <p>Com 4 especialistas, mais de 30 tratamentos e uma reputação construída com dedicação, a Hanabi é hoje um dos centros de estética mais recomendados de Lisboa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <p class="label center">A Nossa Equipa</p>
+    <h2 class="section-title center">Especialistas<br><em>dedicadas</em></h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo" style="background: linear-gradient(135deg, var(--dark-choc), var(--aloewood));">花</div>
+        <h4>Marta Ferreira</h4>
+        <p class="role">Fundadora & Diretora</p>
+        <p>Com formação em Tóquio e 12 anos de experiência, Marta lidera a equipa com paixão pela inovação e pela filosofia japonesa de cuidado.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo" style="background: linear-gradient(135deg, var(--sakura), var(--misty));">美</div>
+        <h4>Joana Costa</h4>
+        <p class="role">Especialista de Rosto</p>
+        <p>Especializada em tratamentos anti-idade e dermocosmetica clínica. Formada em Paris e apaixonada por resultados visíveis e duradouros.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo" style="background: linear-gradient(135deg, var(--aloewood), var(--sakura));">桜</div>
+        <h4>Rita Mendes</h4>
+        <p class="role">Massagista & Bem-estar</p>
+        <p>Técnica certificada em shiatsu, drenagem linfática e massagem ayurvédica. Transforma cada sessão numa experiência de restauração total.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="certif-section">
+    <p class="label center">Qualidade Garantida</p>
+    <h2 class="section-title center">Certificações<br><em>& Parcerias</em></h2>
+    <div class="certif-grid">
+      <div class="certif-item">
+        <span class="certif-icon">🏅</span>
+        <h4>Certificação ISO</h4>
+        <p>Processos certificados em higiene e segurança para total tranquilidade das nossas clientes.</p>
+      </div>
+      <div class="certif-item">
+        <span class="certif-icon">🌿</span>
+        <h4>Produtos Naturais</h4>
+        <p>Parceria com marcas de cosmética natural e sustentável, sem parabenos nem substâncias nocivas.</p>
+      </div>
+      <div class="certif-item">
+        <span class="certif-icon">🎓</span>
+        <h4>Formação Contínua</h4>
+        <p>A nossa equipa frequenta formações internacionais para se manter na vanguarda das técnicas estéticas.</p>
+      </div>
+      <div class="certif-item">
+        <span class="certif-icon">💚</span>
+        <h4>Eco-friendly</h4>
+        <p>Compromisso com práticas sustentáveis: materiais recicláveis, produtos biodegradáveis e desperdício zero.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner-content">
+      <p class="label light">Venha conhecer-nos</p>
+      <h2>A sua primeira visita<br>é <em>especial</em></h2>
+      <a href="cta.beauty.html" class="btn-primary light">Marcar Agora</a>
+    </div>
+    <div class="cta-petals">🌸🌺🌸</div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo"><span class="logo-jp">花美</span><span class="logo-en">Hanabi</span></div>
+        <p>Centro de Estética · Lisboa<br>A sua beleza, o nosso ritual.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navegação</h5>
+        <a href="beauty.html">Início</a>
+        <a href="s.beauty.html">Serviços</a>
+        <a href="catalogo.beauty.html">Catálogo</a>
+        <a href="about.beauty.html">Sobre</a>
+        <a href="cta.beauty.html">Contacto</a>
+      </div>
+      <div class="footer-links">
+        <h5>Sobre</h5>
+        <a href="about.beauty.html">A Nossa História</a>
+        <a href="about.beauty.html">A Nossa Equipa</a>
+        <a href="about.beauty.html">Valores</a>
+        <a href="about.beauty.html">Certificações</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contacto</h5>
+        <p>📍 Rua das Flores, 42 · Lisboa</p>
+        <p>📞 +351 912 345 678</p>
+        <p>✉ ola@hanabi.pt</p>
+        <p>⏰ Seg–Sáb: 9h–20h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Hanabi Centro de Estética. Todos os direitos reservados.</p>
+      <div class="footer-socials"><a href="#">IG</a><a href="#">FB</a><a href="#">TK</a></div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

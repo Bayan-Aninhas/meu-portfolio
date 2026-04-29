@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto & Marcações — 花美 Hanabi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="beauty.css">
+  <style>
+    .map-placeholder {
+      width: 100%;
+      height: 320px;
+      background: linear-gradient(135deg, var(--dark-choc), var(--aloewood));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      color: var(--misty);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .map-placeholder::before {
+      content: '📍';
+      font-size: 3rem;
+    }
+    .map-placeholder span {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+    .map-placeholder p {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    .map-placeholder-bg {
+      position: absolute;
+      font-family: var(--font-jp);
+      font-size: 15rem;
+      color: rgba(242,207,162,0.04);
+      right: -2rem; bottom: -3rem;
+      pointer-events: none;
+    }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+    }
+    .hours-row {
+      display: contents;
+    }
+    .hours-day {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-mid);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(170,127,102,0.1);
+    }
+    .hours-time {
+      font-size: 0.72rem;
+      color: var(--dark-choc);
+      text-align: right;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(170,127,102,0.1);
+      font-weight: 400;
+    }
+    .hours-time.closed { color: var(--sakura); }
+    .contact-note {
+      background: rgba(236,156,157,0.1);
+      border-left: 3px solid var(--sakura);
+      padding: 1rem 1.2rem;
+      border-radius: 0 4px 4px 0;
+      margin-top: 2rem;
+    }
+    .contact-note p {
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+    }
+    .contact-note strong { color: var(--dark-choc); }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--cream);
+      padding: 0.7rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dark-choc);
+      transition: all 0.3s;
+      border: 1px solid rgba(170,127,102,0.2);
+    }
+    .social-link:hover {
+      background: var(--dark-choc);
+      color: var(--misty);
+      border-color: var(--dark-choc);
+    }
+    .faq-section {
+      padding: 6rem 4rem;
+      background: var(--cream);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 2rem;
+      border: 1px solid rgba(236,156,157,0.15);
+      transition: all 0.3s;
+    }
+    .faq-item:hover {
+      border-color: var(--sakura);
+      box-shadow: 0 6px 20px rgba(236,156,157,0.12);
+    }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--dark-choc);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .faq-q::before {
+      content: 'Q';
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      background: var(--sakura);
+      color: var(--white);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+    }
+    .faq-a {
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      padding-left: 2rem;
+    }
+    @media (max-width: 768px) {
+      .faq-section { padding: 4rem 1.5rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .social-links { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-logo" onclick="location.href='beauty.html'">
+      <span class="logo-jp">花美</span>
+      <span class="logo-en">Hanabi</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="beauty.html" class="nav-link">Início</a>
+      <a href="s.beauty.html" class="nav-link">Serviços</a>
+      <a href="catalogo.beauty.html" class="nav-link">Catálogo</a>
+      <a href="about.beauty.html" class="nav-link">Sobre</a>
+      <a href="cta.beauty.html" class="nav-link nav-cta active">Marcar</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg">桜</div>
+    <div>
+      <p>Vamos Falar</p>
+      <h1>Contacto<br><em>& Marcações</em></h1>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+
+    <!-- LEFT: INFO -->
+    <div class="contact-info">
+      <p class="label">Estamos Aqui para Si</p>
+      <h2>O seu ritual<br>começa com um<br><em>contacto</em></h2>
+      <p class="body-text" style="margin-top: 1rem;">Para marcações, dúvidas sobre tratamentos ou simplesmente para saber mais sobre a Hanabi — estamos sempre disponíveis.</p>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <strong>Morada</strong>
+          <p>Rua das Flores, 42<br>1200-193 Lisboa<br><small style="color: var(--sakura);">Metro: Chiado (linha verde)</small></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <strong>Telefone & WhatsApp</strong>
+          <p>+351 912 345 678<br><small style="color: var(--milk-tea);">Resposta em até 2 horas</small></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉</div>
+        <div class="contact-detail-text">
+          <strong>Email</strong>
+          <p>ola@hanabi.pt<br><small style="color: var(--milk-tea);">Para assuntos mais detalhados</small></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-icon">⏰</div>
+        <div class="contact-detail-text">
+          <strong>Horário de Funcionamento</strong>
+          <div class="hours-grid">
+            <span class="hours-day">Segunda–Sexta</span>
+            <span class="hours-time">9h00 – 20h00</span>
+            <span class="hours-day">Sábado</span>
+            <span class="hours-time">9h00 – 18h00</span>
+            <span class="hours-day">Domingo</span>
+            <span class="hours-time closed">Encerrado</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="#" class="social-link">📸 Instagram</a>
+        <a href="#" class="social-link">📘 Facebook</a>
+        <a href="#" class="social-link">🎵 TikTok</a>
+      </div>
+
+      <!-- MAP -->
+      <div class="map-placeholder">
+        <div class="map-placeholder-bg">花</div>
+        <p>Rua das Flores, 42 · Lisboa</p>
+        <span>Ver no Google Maps</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div>
+      <div class="contact-form">
+        <h3>Fazer uma<br><em style="font-style: italic; color: var(--aloewood);">marcação</em></h3>
+        <p style="font-size: 0.75rem; color: var(--text-mid); margin-bottom: 2rem; line-height: 1.7;">Preencha o formulário e entraremos em contacto para confirmar a sua marcação num prazo de 2 horas.</p>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" placeholder="O seu nome" required>
+            </div>
+            <div class="form-group">
+              <label for="apelido">Apelido *</label>
+              <input type="text" id="apelido" placeholder="O seu apelido" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" placeholder="email@exemplo.com" required>
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" placeholder="+351 9XX XXX XXX">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="servico">Serviço de Interesse *</label>
+            <select id="servico" required>
+              <option value="" disabled selected>Selecione um serviço</option>
+              <optgroup label="🌸 Rosto">
+                <option>Limpeza de Pele Profunda — 45€</option>
+                <option>Hidratação Intensiva — 55€</option>
+                <option>Tratamento Anti-Idade — 75€</option>
+                <option>Peeling Químico — 65€</option>
+                <option>Microagulhamento — 90€</option>
+                <option>Radiofrequência Facial — 80€</option>
+              </optgroup>
+              <optgroup label="💆 Corpo">
+                <option>Drenagem Linfática — 60€</option>
+                <option>Modelação Corporal — 70€</option>
+                <option>Esfoliação Ritual — 55€</option>
+                <option>Tratamento Anticelulítico — 65€</option>
+              </optgroup>
+              <optgroup label="✨ Depilação">
+                <option>Depilação a Cera — Pernas — 30€</option>
+                <option>Depilação a Cera — Axilas — 12€</option>
+                <option>Depilação Íntima — 25€</option>
+                <option>Laser Diodo — consultar zona</option>
+              </optgroup>
+              <optgroup label="🌺 Massagem">
+                <option>Massagem Relaxante — 55€</option>
+                <option>Pedras Quentes — 70€</option>
+                <option>Ritual Japonês Completo — 110€</option>
+              </optgroup>
+              <optgroup label="💅 Unhas & Sobrancelhas">
+                <option>Manicure Completa — 22€</option>
+                <option>Pedicure Completa — 28€</option>
+                <option>Unhas em Gel — 35€</option>
+                <option>Design de Sobrancelhas — 15€</option>
+                <option>Laminação de Sobrancelhas — 35€</option>
+              </optgroup>
+              <option value="outro">Outro / Não sei ainda</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="data">Data Preferida</label>
+              <input type="date" id="data">
+            </div>
+            <div class="form-group">
+              <label for="hora">Hora Preferida</label>
+              <select id="hora">
+                <option value="" disabled selected>Selecione</option>
+                <option>09h00</option>
+                <option>10h00</option>
+                <option>11h00</option>
+                <option>12h00</option>
+                <option>14h00</option>
+                <option>15h00</option>
+                <option>16h00</option>
+                <option>17h00</option>
+                <option>18h00</option>
+                <option>19h00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem ou Notas</label>
+            <textarea id="mensagem" placeholder="Informações adicionais, alergias conhecidas, preferências especiais..."></textarea>
+          </div>
+
+          <div class="contact-note">
+            <p>🌸 <strong>Primeira visita?</strong> Mencione-o na mensagem e oferecemos uma consulta de diagnóstico de pele gratuita antes do seu tratamento.</p>
+          </div>
+
+          <button type="submit" class="btn-primary form-submit" style="margin-top: 1.5rem;">Enviar Pedido de Marcação</button>
+          <div class="success-msg" id="successMsg">
+            🌸 Pedido enviado com sucesso! Entraremos em contacto em breve para confirmar a sua marcação.
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <p class="label center">Perguntas Frequentes</p>
+    <h2 class="section-title center">Dúvidas mais<br><em>comuns</em></h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Com quanto tempo de antecedência devo marcar?</div>
+        <p class="faq-a">Recomendamos marcar com pelo menos 48h de antecedência. Para fins de semana e tratamentos mais populares como o Ritual Japonês, sugerimos 1 semana.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso cancelar ou remarcar a minha marcação?</div>
+        <p class="faq-a">Sim, aceitamos cancelamentos até 24h antes sem qualquer custo. Após esse prazo, pode ser aplicada uma taxa de cancelamento de 50% do valor do tratamento.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Os tratamentos são adequados para peles sensíveis?</div>
+        <p class="faq-a">Absolutamente. Realizamos sempre uma consulta inicial para avaliar o seu tipo de pele e adaptar o protocolo. Temos alternativas suaves para todos os perfis de pele.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quantas sessões são necessárias para ver resultados?</div>
+        <p class="faq-a">Depende do tratamento. Muitas clientes notam resultados após a 1ª sessão, especialmente em limpeza de pele e massagem. Para laser e anti-idade, recomendamos um ciclo de 4 a 6 sessões.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Oferecem pacotes ou vouchers de oferta?</div>
+        <p class="faq-a">Sim! Temos pacotes de múltiplas sessões com desconto e vouchers de oferta disponíveis para todas as ocasiões. Contacte-nos para mais informações.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso trazer a minha amiga ou familiar?</div>
+        <p class="faq-a">Claro! Temos um programa "Amiga Especial" onde ambas recebem 15% de desconto na primeira visita juntas. Basta mencionar ao marcar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="cta-banner-content">
+      <p class="label light">Ainda tem dúvidas?</p>
+      <h2>Ligue-nos e<br><em>orientamos</em> si</h2>
+      <a href="tel:+351912345678" class="btn-primary light">+351 912 345 678</a>
+    </div>
+    <div class="cta-petals">🌸🌺🌸</div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo"><span class="logo-jp">花美</span><span class="logo-en">Hanabi</span></div>
+        <p>Centro de Estética · Lisboa<br>A sua beleza, o nosso ritual.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navegação</h5>
+        <a href="beauty.html">Início</a>
+        <a href="s.beauty.html">Serviços</a>
+        <a href="catalogo.beauty.html">Catálogo</a>
+        <a href="about.beauty.html">Sobre</a>
+        <a href="cta.beauty.html">Contacto</a>
+      </div>
+      <div class="footer-links">
+        <h5>Serviços</h5>
+        <a href="s.beauty.html#rosto">Rosto</a>
+        <a href="s.beauty.html#corpo">Corpo</a>
+        <a href="s.beauty.html#depilacao">Depilação</a>
+        <a href="s.beauty.html#massagem">Massagem</a>
+        <a href="s.beauty.html#unhas">Unhas</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contacto</h5>
+        <p>📍 Rua das Flores, 42 · Lisboa</p>
+        <p>📞 +351 912 345 678</p>
+        <p>✉ ola@hanabi.pt</p>
+        <p>⏰ Seg–Sáb: 9h–20h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Hanabi Centro de Estética. Todos os direitos reservados.</p>
+      <div class="footer-socials"><a href="#">IG</a><a href="#">FB</a><a href="#">TK</a></div>
+    </div>
+  </footer>
+
+  <script src="beauty.js"></script>
+  <script>
+    // Set min date for date picker to today
+    const dateInput = document.getElementById('data');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+  </script>
+</body>
+</html>
