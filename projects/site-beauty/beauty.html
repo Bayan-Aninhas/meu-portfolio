@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花美 Hanabi — Centro de Estética</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="beauty.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">
+      <span class="logo-jp">花美</span>
+      <span class="logo-en">Hanabi</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="nav-link active">Início</a>
+      <a href="s.beauty.html" class="nav-link">Serviços</a>
+      <a href="catalogo.html" class="nav-link">Catálogo</a>
+      <a href="sobre.html" class="nav-link">Sobre</a>
+      <a href="contacto.html" class="nav-link nav-cta">Marcar</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-petals" id="petalContainer"></div>
+    <div class="hero-bg-text">美</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Centro de Estética · Lisboa</p>
+      <h1 class="hero-title">
+        A arte do<br>
+        <em>cuidado</em><br>
+        feminino
+      </h1>
+      <p class="hero-sub">Rituais de beleza inspirados na serenidade japonesa,<br>pensados para a mulher moderna.</p>
+      <div class="hero-actions">
+        <a href="contacto.html" class="btn-primary">Marcar Consulta</a>
+        <a href="s.beauty.html" class="btn-ghost">Ver Tratamentos</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-circle"></div>
+      <div class="hero-circle hero-circle--2"></div>
+      <div class="hero-badge">
+        <span class="badge-num">花</span>
+        <span class="badge-text">Hanabi Beauty</span>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Descubra</span>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span>Rosto</span><span class="sep">·</span>
+      <span>Corpo</span><span class="sep">·</span>
+      <span>Depilação</span><span class="sep">·</span>
+      <span>Massagem</span><span class="sep">·</span>
+      <span>Unhas</span><span class="sep">·</span>
+      <span>Sobrancelhas</span><span class="sep">·</span>
+      <span>Rosto</span><span class="sep">·</span>
+      <span>Corpo</span><span class="sep">·</span>
+      <span>Depilação</span><span class="sep">·</span>
+      <span>Massagem</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro section">
+    <div class="intro-left">
+      <div class="intro-img-wrap">
+        <div class="intro-img-block intro-img-block--1"></div>
+        <div class="intro-img-block intro-img-block--2"></div>
+        <div class="intro-tag">Est. 2018</div>
+      </div>
+    </div>
+    <div class="intro-right">
+      <p class="label">A Nossa Filosofia</p>
+      <h2 class="section-title">Beleza que<br><em>transforma</em></h2>
+      <p class="body-text">Na Hanabi, cada visita é um ritual. Combinamos técnicas avançadas com ingredientes de origem japonesa para oferecer resultados visíveis e uma experiência sensorial única.</p>
+      <p class="body-text">O nosso espaço foi pensado como um refúgio — onde a agitação do dia fica do lado de fora e você é a prioridade.</p>
+      <a href="sobre.html" class="link-arrow">Conheça a nossa história →</a>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="services-prev section">
+    <div class="services-prev-header">
+      <p class="label">O Que Fazemos</p>
+      <h2 class="section-title">Tratamentos<br><em>em destaque</em></h2>
+      <a href="servicos.html" class="link-arrow desktop-only">Ver todos os serviços →</a>
+    </div>
+    <div class="services-grid">
+      <div class="srv-card srv-card--wide" data-href="servicos.html#rosto">
+        <div class="srv-card-bg" style="background: linear-gradient(135deg, #443025 0%, #7F5836 100%)"></div>
+        <div class="srv-num">01</div>
+        <div class="srv-icon">✦</div>
+        <h3 class="srv-title">Tratamentos<br>de Rosto</h3>
+        <p class="srv-desc">Limpeza profunda, hidratação intensiva e protocolos anti-idade.</p>
+        <span class="srv-link">Saber mais →</span>
+      </div>
+      <div class="srv-card" data-href="servicos.html#corpo">
+        <div class="srv-card-bg" style="background: linear-gradient(135deg, #EC9C9D 0%, #AA7F66 100%)"></div>
+        <div class="srv-num">02</div>
+        <div class="srv-icon">◆</div>
+        <h3 class="srv-title">Tratamentos<br>de Corpo</h3>
+        <p class="srv-desc">Modelação, drenagem e rituais de bem-estar.</p>
+        <span class="srv-link">Saber mais →</span>
+      </div>
+      <div class="srv-card" data-href="servicos.html#depilacao">
+        <div class="srv-card-bg" style="background: linear-gradient(135deg, #7F5836 0%, #AA7F66 100%)"></div>
+        <div class="srv-num">03</div>
+        <div class="srv-icon">❋</div>
+        <h3 class="srv-title">Depilação<br>Laser & Cera</h3>
+        <p class="srv-desc">Métodos eficazes para uma pele suave e duradoura.</p>
+        <span class="srv-link">Saber mais →</span>
+      </div>
+      <div class="srv-card" data-href="servicos.html#massagem">
+        <div class="srv-card-bg" style="background: linear-gradient(135deg, #F2CF2A20 0%, #EC9C9D40 100%)"></div>
+        <div class="srv-card-bg" style="background: linear-gradient(135deg, #443025 0%, #EC9C9D 100%)"></div>
+        <div class="srv-num">04</div>
+        <div class="srv-icon">⊹</div>
+        <h3 class="srv-title">Massagem<br>& Relaxamento</h3>
+        <p class="srv-desc">Técnicas orientais para corpo e mente em harmonia.</p>
+        <span class="srv-link">Saber mais →</span>
+      </div>
+    </div>
+    <a href="servicos.html" class="btn-primary mobile-only" style="margin: 2rem auto 0; display:block; width:fit-content">Ver todos</a>
+  </section>
+
+  <!-- RITUAL SECTION -->
+  <section class="ritual section">
+    <div class="ritual-bg-text">花</div>
+    <div class="ritual-content">
+      <p class="label light">O Nosso Processo</p>
+      <h2 class="section-title light">O seu ritual<br><em>em 3 passos</em></h2>
+      <div class="ritual-steps">
+        <div class="ritual-step">
+          <div class="step-circle">01</div>
+          <h4>Consulta</h4>
+          <p>Avaliamos o seu tipo de pele e necessidades específicas para personalizar o tratamento ideal.</p>
+        </div>
+        <div class="ritual-line"></div>
+        <div class="ritual-step">
+          <div class="step-circle">02</div>
+          <h4>Ritual</h4>
+          <p>A nossa especialista aplica o protocolo selecionado num ambiente sereno e acolhedor.</p>
+        </div>
+        <div class="ritual-line"></div>
+        <div class="ritual-step">
+          <div class="step-circle">03</div>
+          <h4>Brilho</h4>
+          <p>Sai renovada, com conselhos personalizados para manter os resultados em casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials section">
+    <p class="label center">Clientes</p>
+    <h2 class="section-title center">O que dizem<br><em>de nós</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"A melhor limpeza de pele que já fiz. O espaço é lindo e a Marta é uma profissional incrível. Já marquei para o próximo mês!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div>
+            <strong>Sofia M.</strong>
+            <span>Limpeza de Pele</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card testi-card--featured">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Fui pela primeira vez e fiquei rendida. A massagem relaxante foi um sonho. O ambiente tem uma energia especial — parece que saímos de Lisboa por um momento."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <strong>Ana R.</strong>
+            <span>Massagem Japonesa</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Finalmente encontrei um sítio onde me sinto verdadeiramente cuidada. A depilação com cera é rápida, eficaz e sem drama. Recomendo a todas!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">C</div>
+          <div>
+            <strong>Carla T.</strong>
+            <span>Depilação Corporal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="cta-banner-content">
+      <p class="label light">Pronta para começar?</p>
+      <h2>Reserve o seu<br><em>momento</em> hoje</h2>
+      <a href="contacto.html" class="btn-primary light">Marcar Agora</a>
+    </div>
+    <div class="cta-petals">🌸🌸🌸</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <span class="logo-jp">花美</span>
+          <span class="logo-en">Hanabi</span>
+        </div>
+        <p>Centro de Estética · Lisboa<br>A sua beleza, o nosso ritual.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navegação</h5>
+        <a href="index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-links">
+        <h5>Serviços</h5>
+        <a href="servicos.html#rosto">Rosto</a>
+        <a href="servicos.html#corpo">Corpo</a>
+        <a href="servicos.html#depilacao">Depilação</a>
+        <a href="servicos.html#massagem">Massagem</a>
+        <a href="servicos.html#unhas">Unhas</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contacto</h5>
+        <p>📍 Rua das Flores, 42<br>1200-193 Lisboa</p>
+        <p>📞 +351 912 345 678</p>
+        <p>✉ ola@hanabi.pt</p>
+        <p>⏰ Seg–Sáb: 9h–20h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Hanabi Centro de Estética. Todos os direitos reservados.</p>
+      <div class="footer-socials">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">TK</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="beauty.js"></script>
+</body>
+</html>
